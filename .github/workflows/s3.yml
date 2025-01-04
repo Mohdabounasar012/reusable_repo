@@ -34,4 +34,4 @@ jobs:
 
       - name: Sync files to S3
         run: |
-          aws s3 sync ${GITHUB_WORKSPACE}/${{ inputs.source_dir }} s3://${{ inputs.bucket_name }} --delete
+          aws s3 sync ${{ inputs.source_dir }} s3://${{ inputs.bucket_name }} --delete
