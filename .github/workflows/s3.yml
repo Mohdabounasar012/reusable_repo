@@ -1,4 +1,3 @@
-# .github/workflows/s3.yml
 name: Deploy to S3
 
 on:
@@ -13,6 +12,11 @@ on:
       source_dir:
         required: true
         type: string
+    secrets:
+      AWS_ACCESS_KEY_ID:
+        required: true
+      AWS_SECRET_ACCESS_KEY:
+        required: true
 
 jobs:
   deploy:
@@ -27,8 +31,8 @@ jobs:
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: ${{ inputs.eu-north-1 }}
+          aws_region: ${{ inputs.region }}  # Correct reference to region
 
       - name: Sync files to S3
         run: |
-          aws s3 sync ${GITHUB_WORKSPACE}/${{ inputs.'./dist' }} s3://${{ inputs.reusable-s3-bucket }} --delete
+          aws s3 sync ${GITHUB_WORKSPACE}/${{ inputs.source_dir }} s3://${{ inputs.bucket_name }} --delete  # Corrected sync command
