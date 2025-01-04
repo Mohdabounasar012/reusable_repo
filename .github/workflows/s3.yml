@@ -27,8 +27,8 @@ jobs:
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: ${{ inputs.region }}
+          aws_region: ${{ inputs.eu-north-1 }}
 
       - name: Sync files to S3
         run: |
-          aws s3 sync ${GITHUB_WORKSPACE}/${{ inputs.source_dir }} s3://${{ inputs.bucket_name }} --delete
+          aws s3 sync ${GITHUB_WORKSPACE}/${{ inputs.'./dist' }} s3://${{ inputs.reusable-s3-bucket }} --delete
