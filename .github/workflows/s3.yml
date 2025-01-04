@@ -15,7 +15,7 @@ on:
       AWS_SECRET_ACCESS_KEY:
         required: true
       AWS_REGION:
-        required: true
+        required: false
 
 jobs:
   deploy:
