@@ -14,8 +14,8 @@ on:
         required: true
       AWS_SECRET_ACCESS_KEY:
         required: true
-      # AWS_REGION:
-      #   required: true
+      AWS_REGION:
+        required: true
 
 jobs:
   deploy:
@@ -28,10 +28,10 @@ jobs:
       - name: Set up AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: eu-north-1  # Correct reference to region
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}  # Pass AWS region from secrets
 
       - name: Sync files to S3
         run: |
-          aws s3 sync ${GITHUB_WORKSPACE}/${{ inputs.source_dir }} s3://${{ inputs.bucket_name }} --delete  # Corrected sync command
+          aws s3 sync ${GITHUB_WORKSPACE}/${{ inputs.source_dir }} s3://${{ inputs.bucket_name }} --delete
